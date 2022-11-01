@@ -1,4 +1,4 @@
-from Konto import Konto
+from app.Konto import Konto
 
 class KontoFirmowe(Konto):
     def __init__(self, nazwa_firmy, nip):
@@ -7,5 +7,7 @@ class KontoFirmowe(Konto):
         self.oplata = 5
         self.nip = nip if self.czy_poprawny_nip(nip) else "Niepoprawny NIP!"
 
-        def czy_poprawny_nip(self, nip):
-            return len(nip) == 10
+    def czy_poprawny_nip(self, nip):
+        return len(nip) == 10
+    
+ 

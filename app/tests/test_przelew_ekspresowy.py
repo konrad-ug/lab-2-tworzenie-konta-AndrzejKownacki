@@ -1,7 +1,7 @@
 import unittest
 
-from ..Konto  import Konto
-from ..KontoFirmowe import KontoFirmowe
+from app.Konto import Konto
+from app.KontoFirmowe import KontoFirmowe
 
 class TestPrzelewEkspresowy(unittest.TestCase):
     nazwa_firmy = "METPOL"
@@ -12,7 +12,7 @@ class TestPrzelewEkspresowy(unittest.TestCase):
     pesel = "13467524635"
 
     def test_nieudany_ekspresowy_konto(self):
-        konto = Konto(self.imie, self.naziwsko, self.pesel)
+        konto = Konto(self.imie, self.naziwsko, self.pesel, None)
         konto.saldo = 200
         konto.przelew_ekspresowy(300)
         self.assertEqual(konto.saldo, 200)
@@ -21,10 +21,10 @@ class TestPrzelewEkspresowy(unittest.TestCase):
         konto = KontoFirmowe(self.nazwa_firmy, self.nip)
         konto.saldo = 200
         konto.przelew_ekspresowy(300)
-        self.assertEqual(KontoFirmowe.saldo, 200)
+        self.assertEqual(konto.saldo, 200)
 
     def test_ekspresowy_konto(self):
-        konto = Konto(self.imie, self.naziwsko, self.pesel)
+        konto = Konto(self.imie, self.naziwsko, self.pesel, None)
         konto.saldo = 2000
         konto.przelew_ekspresowy(300)
         self.assertEqual(konto.saldo, 2000-300-1)
@@ -33,4 +33,4 @@ class TestPrzelewEkspresowy(unittest.TestCase):
         konto = KontoFirmowe(self.nazwa_firmy, self.nip)
         konto.saldo = 2000
         konto.przelew_ekspresowy(300)
-        self.assertEqual(KontoFirmowe.saldo, 2000-300-5)
+        self.assertEqual(konto.saldo, 2000-300-5)
