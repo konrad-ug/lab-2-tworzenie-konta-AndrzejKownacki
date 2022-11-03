@@ -38,3 +38,11 @@ class TestCreateBankAccount(unittest.TestCase):
     def test_niepoprawny_kod_wiek(self):
         konto = Konto(self.imie, self.nazwisko, "53211479876", "PROM_XYZ") 
         self.assertEqual(konto.saldo, 0)
+
+    def test_poprawny_kod_wiek1(self):
+        konto = Konto(self.imie, self.nazwisko, "61111479876", "PROM_XYZ") 
+        self.assertEqual(konto.saldo, 50)
+
+    def test_poprawny_kod_wiek2(self):
+        konto = Konto(self.imie, self.nazwisko, "02211479876", "PROM_XYZ") 
+        self.assertEqual(konto.saldo, 50) 
