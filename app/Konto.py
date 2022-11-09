@@ -18,6 +18,8 @@ class Konto:
         else:
             self.kod = None
 
+        self.historia = []
+
     def czy_poprawny_pesel(self, pesel):
         return len(pesel) == 11
 
@@ -40,14 +42,21 @@ class Konto:
             return False
 
 
-    def zaksieguj_przelew(self, kwota):
+    def zaksieguj_przelew_wychodzacy(self, kwota):
         if self.saldo >= kwota:
             self.saldo = self.saldo - kwota
+            self.historia.append(-kwota)
+        
+    def zaksieguj_przelew_przychodzacy(self, kwota):
+        self.saldo = self.saldo + kwota
+        self.historia.append(kwota)
 
     def przelew_ekspresowy(self, kwota):
         saldoPrzed = self.saldo
 
-        self.zaksieguj_przelew(kwota)
+        self.zaksieguj_przelew_wychodzacy(kwota)
+        
 
         if self.saldo != saldoPrzed:
             self.saldo -= self.oplata
+            self.historia.append(-self.oplata)
