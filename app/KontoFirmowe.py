@@ -6,8 +6,7 @@ class KontoFirmowe(Konto):
         self.saldo = 0
         self.oplata = 5
         self.nip = nip if self.czy_poprawny_nip(nip) else "Niepoprawny NIP!"
+        self.historia = []
 
     def czy_poprawny_nip(self, nip):
         return len(nip) == 10
-    
- 

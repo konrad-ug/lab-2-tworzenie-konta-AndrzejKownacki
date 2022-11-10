@@ -45,7 +45,7 @@ class Konto:
     def zaksieguj_przelew_wychodzacy(self, kwota):
         if self.saldo >= kwota:
             self.saldo = self.saldo - kwota
-            self.historia.append(-self.kwota)
+            self.historia.append(-kwota)
         
     def zaksieguj_przelew_przychodzacy(self, kwota):
         self.saldo = self.saldo + kwota
@@ -59,4 +59,27 @@ class Konto:
 
         if self.saldo != saldoPrzed:
             self.saldo -= self.oplata
-            self.historia(-self.oplata)
+            self.historia.append(-self.oplata)
+
+    def zaciagnij_kredyt(self, kwota):
+        l = len(self.historia)
+        czy_przyznany = False
+
+        if l >= 3:
+            if self.historia[l-1] > 0 and self.historia[l-2] > 0 and self.historia[l-3] > 0:
+                czy_przyznany = True
+        
+        if l >= 5:
+            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] + self.historia[l-4] + self.historia[l-5] > kwota:
+                czy_przyznany = True
+        elif l == 4:
+            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] + self.historia[l-4] > kwota:
+                czy_przyznany = True
+        elif l == 3:
+            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] > kwota:
+                czy_przyznany = True
+        
+        if czy_przyznany == True:
+            self.saldo = self.saldo + kwota
+
+        return czy_przyznany
