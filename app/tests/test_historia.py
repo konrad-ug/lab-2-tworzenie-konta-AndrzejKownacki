@@ -1,6 +1,5 @@
-import unittest
-
 from ..Konto import Konto
+
 
 class TestKsiegowanie(unittest.TestCase):
     imie = "Dariusz"
@@ -14,4 +13,6 @@ class TestKsiegowanie(unittest.TestCase):
         konto.zaksieguj_przelew_przychodzacy(200)
         konto.zaksieguj_przelew_wychodzacy(300)
         konto.przelew_ekspresowy(400)
-        
+
+        self.assertEqual(konto.historia, [200, -300, -400, -1])
+

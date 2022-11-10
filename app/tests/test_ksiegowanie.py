@@ -26,4 +26,5 @@ class TestKsiegowanie(unittest.TestCase):
         konto.saldo = 1000
         konto.zaksieguj_przelew_przychodzacy(200)
 
+
         self.assertEqual(konto.saldo, 1200)
