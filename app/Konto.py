@@ -61,25 +61,24 @@ class Konto:
             self.saldo -= self.oplata
             self.historia.append(-self.oplata)
 
-    def zaciagnij_kredyt(self, kwota):
+   
+    def czy_ostatnie_3_transakcji_byly_wplatami(self):
         l = len(self.historia)
-        czy_przyznany = False
+        if l >= 3 and self.historia[l-1] > 0 and self.historia[l-2] > 0 and self.historia[l-3] > 0:
+            return True
+        else:
+            return False
 
-        if l >= 3:
-            if self.historia[l-1] > 0 and self.historia[l-2] > 0 and self.historia[l-3] > 0:
-                czy_przyznany = True
-        
-        if l >= 5:
-            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] + self.historia[l-4] + self.historia[l-5] > kwota:
-                czy_przyznany = True
-        elif l == 4:
-            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] + self.historia[l-4] > kwota:
-                czy_przyznany = True
-        elif l == 3:
-            if self.historia[l-1] + self.historia[l-2] + self.historia[l-3] > kwota:
-                czy_przyznany = True
-        
-        if czy_przyznany == True:
+    def czy_suma_ostatnich_5_wieksza(self,kwota):
+        l = len(self.historia)
+        if l >= 5 and kwota < sum(self.historia[-5:]):
+            return True
+        else:
+            return False
+
+    def zaciagnij_kredyt(self, kwota):
+        if self.czy_ostatnie_3_transakcji_byly_wplatami() or self.czy_suma_ostatnich_5_wieksza(kwota):
             self.saldo = self.saldo + kwota
-
-        return czy_przyznany
+            return True
+        else:
+            return False

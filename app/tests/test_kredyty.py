@@ -15,8 +15,8 @@ class TestKredyt(unittest.TestCase):
     @parameterized.expand([
         ([-100, 100, 100, 100], 500, True, 500),
         ([-100, 100, -100, 100, 1000], 500, True, 500),
-        ([100, -100, 100, 1000], 500, True, 500),
-        ([-100, 100, 1000], 500, True, 500),
+        ([100, -100, 100, 1000], 500, False, 0),
+        ([-100, 100, 1000], 500, False, 0),
         ([-100, 100, 100], 500, False, 0),
     ])
     def test_przychodzace_przelewy(self, historia, kwota, oczekiwany_wynik, saldo):
