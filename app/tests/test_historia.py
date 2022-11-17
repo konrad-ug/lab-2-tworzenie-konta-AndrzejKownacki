@@ -1,7 +1,7 @@
-
 import unittest
 
-from app.Konto import Konto
+from ..Konto import Konto
+
 
 class TestKsiegowanie(unittest.TestCase):
     imie = "Dariusz"
@@ -17,3 +17,4 @@ class TestKsiegowanie(unittest.TestCase):
         konto.przelew_ekspresowy(400)
 
         self.assertEqual(konto.historia, [200, -300, -400, -1])
+

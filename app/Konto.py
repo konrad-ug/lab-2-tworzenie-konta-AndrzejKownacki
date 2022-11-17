@@ -60,3 +60,25 @@ class Konto:
         if self.saldo != saldoPrzed:
             self.saldo -= self.oplata
             self.historia.append(-self.oplata)
+
+   
+    def czy_ostatnie_3_transakcji_byly_wplatami(self):
+        l = len(self.historia)
+        if l >= 3 and self.historia[l-1] > 0 and self.historia[l-2] > 0 and self.historia[l-3] > 0:
+            return True
+        else:
+            return False
+
+    def czy_suma_ostatnich_5_wieksza(self,kwota):
+        l = len(self.historia)
+        if l >= 5 and kwota < sum(self.historia[-5:]):
+            return True
+        else:
+            return False
+
+    def zaciagnij_kredyt(self, kwota):
+        if self.czy_ostatnie_3_transakcji_byly_wplatami() or self.czy_suma_ostatnich_5_wieksza(kwota):
+            self.saldo = self.saldo + kwota
+            return True
+        else:
+            return False
