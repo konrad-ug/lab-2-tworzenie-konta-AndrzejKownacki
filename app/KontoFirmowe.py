@@ -13,7 +13,7 @@ class KontoFirmowe(Konto):
 
     def zaciagnij_kredyt_firma(self, kwota):
         czy_przyznany = False
-        zus = 1775
+        zus = -1775
 
         if kwota*2 <= self.saldo and zus in self.historia:
             czy_przyznany = True
