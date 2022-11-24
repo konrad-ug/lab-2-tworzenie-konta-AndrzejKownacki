@@ -5,14 +5,16 @@ from ..RejestrKont import RejestrKont
 
 class TestRejestruKont(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUp(cls):
         imie = "Dariusz"
         nazwisko = "Testowy"
         pesel = "93211479876"
-        self.konto = Konto(imie, nazwisko, pesel, None)
-        RejestrKont.dodaj_konto(self.konto)
+        cls.konto = Konto(imie, nazwisko, pesel, None)
+        RejestrKont.dodaj_konto(cls.konto)
 
-    def tearDown(self):
+    @classmethod
+    def tearDown(cls):
         RejestrKont.lista=[]
 
 
