@@ -18,3 +18,12 @@ class TestKsiegowanie(unittest.TestCase):
 
         self.assertEqual(konto.historia, [200, -300, -400, -1])
 
+    def test_wysyłanie_maila_z_historia(self):
+        konto = Konto(self.imie, self.nazwisko,self.pesel, None)
+        konto.saldo = 1000
+        konto.zaksieguj_przelew_przychodzacy(100)
+        smtp_connector = SMTPConnection()
+        smtp_connector = MagicMock(return_value = True)
+        status = konto.test_wysyłanie_maila_z_historia("konrad@gmail.com", smtp_connector)
+        self.assertTrue(status)
+        #sprawdzić czy smtp_connector.wyslij została uruchomiona

@@ -1,3 +1,4 @@
+from SMTPConnection import SMTPConnection
 class Konto:
     def __init__(self, imie, nazwisko, pesel, kod):
         self.imie = imie
@@ -82,3 +83,6 @@ class Konto:
             return True
         else:
             return False
+
+    def wyslij_historie_na_maila(self, adres, smtp_connector):
+        if wyslij(temat, tresc, adresat)
